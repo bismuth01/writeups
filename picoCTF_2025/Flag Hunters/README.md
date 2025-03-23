@@ -1,11 +1,9 @@
 # Flag Hunters - PicoCTF 2025 (Reverse Engineering)
 
 ## Introduction
-
 We were given a netcat server to connect to and the source code that was being run on the server.
 
 ## Analysis
-
 On connecting to the netcat server, it started to print out the verses of the poem. And it stopped once for input asking for "CROWD (Singalong here!)".
 
 The input given was printed again at the end of every verse.
@@ -13,14 +11,12 @@ The input given was printed again at the end of every verse.
 The program prints out a poem and after each verse prints out the verse starting with [REFRAIN] again. As it goes, it dynamically changes the line with RETURN and adds a number to the end of it. The number added at the end is the line it will print next.
 
 ## Exploitation
-
 Just adding any string after crowd does not get it processed due to the regex having strict matching expression.
 To avoid this we use the vulnerability of the split(;) function. So if we add a ; in a line, the line is divided into 2 parts and processed seperately.
 
 So in the input we write ;RETURN 0 which first splits the string and then processes RETURN 0 seperately. and thus printing from the first line and giving us the flag.
 
 ## Flag
-
 picoCTF{70637h3r_f0r3v3r_c659e814}
 
 ## Appendices
